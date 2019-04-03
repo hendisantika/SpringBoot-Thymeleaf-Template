@@ -1,6 +1,7 @@
 package com.hendisantika.springbootthymeleaftemplate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.Collection;
  * Date: 2019-04-04
  * Time: 06:45
  */
+@Data
 @Entity
 @Table(name = "user")
 public class User {
