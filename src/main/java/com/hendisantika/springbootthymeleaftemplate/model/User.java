@@ -1,4 +1,4 @@
-package com.hendisantika.springbootthymeleaftemplate;
+package com.hendisantika.springbootthymeleaftemplate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;

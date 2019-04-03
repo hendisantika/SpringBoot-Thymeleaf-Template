@@ -1,4 +1,4 @@
-package com.hendisantika.springbootthymeleaftemplate;
+package com.hendisantika.springbootthymeleaftemplate.model;
 
 import lombok.Data;
 
