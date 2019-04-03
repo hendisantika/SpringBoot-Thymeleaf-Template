@@ -3,6 +3,7 @@ package com.hendisantika.springbootthymeleaftemplate;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
