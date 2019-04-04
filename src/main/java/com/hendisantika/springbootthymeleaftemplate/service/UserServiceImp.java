@@ -21,7 +21,6 @@ import java.util.Arrays;
 
 @Service
 public class UserServiceImp implements UserService {
-    Autowired
     public static final String USER_ROLE = "ROLE_USER";
 
     private UserRepository userRepository;
