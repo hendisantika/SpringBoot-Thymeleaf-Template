@@ -7,14 +7,18 @@
     <div th:fragment="header">
         <title>Secured App</title>
 
-        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-              media="screen"
-              rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+        <!--        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.3.1/css/bootstrap.min.css"-->
+        <!--              media="screen"-->
+        <!--              rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>-->
 
-        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-                th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+        <link media="screen" rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
 
-        <link href="../../css/main.css" rel="stylesheet"
+        <!--        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"-->
+        <!--                th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>-->
+        <!--        <script th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>-->
+        <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+        <link href="/css/main.css" rel="stylesheet"
               th:href="@{/css/main.css}"/>
     </div>
 
