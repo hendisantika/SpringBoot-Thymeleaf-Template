@@ -15,6 +15,7 @@ import java.security.Principal;
  * Time: 06:58
  */
 @Controller
+//@CrossOrigin(origins = {"http://localhost:8080"})
 public class LoginController {
 
     @GetMapping("/login")

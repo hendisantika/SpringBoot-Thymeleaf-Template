@@ -6,10 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
@@ -24,7 +25,7 @@ import javax.sql.DataSource;
  */
 
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
@@ -53,7 +54,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      * @param http
      * @throws Exception
      */
-    @Override
+//    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
@@ -109,5 +110,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser(adminUsername).password(adminPassword).roles("ADMIN");
     }
 
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(rootDomainInterceptor())
+                .excludePathPatterns("/js/**", "/css/**", "/images/**", "/webjars/**");
+
+    }
 
 }
