@@ -43,6 +43,9 @@ public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
+    @Autowired
+    SecurityInterceptor securityInterceptor;
+
     /**
      * HTTPSecurity configurer
      * - roles ADMIN allow to access /admin/**
@@ -111,7 +114,7 @@ public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(rootDomainInterceptor())
+        registry.addInterceptor(securityInterceptor)
                 .excludePathPatterns("/js/**", "/css/**", "/images/**", "/webjars/**");
 
     }
