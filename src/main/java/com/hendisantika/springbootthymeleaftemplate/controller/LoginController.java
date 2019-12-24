@@ -1,6 +1,7 @@
 package com.hendisantika.springbootthymeleaftemplate.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
@@ -15,7 +16,7 @@ import java.security.Principal;
  * Time: 06:58
  */
 @Controller
-//@CrossOrigin(origins = {"http://localhost:8080"})
+@CrossOrigin(origins = {"http://localhost:8080"})
 public class LoginController {
 
     @GetMapping("/login")

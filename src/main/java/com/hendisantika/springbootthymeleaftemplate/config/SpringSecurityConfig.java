@@ -110,7 +110,7 @@ public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
 
         // In memory authentication
         auth.inMemoryAuthentication()
-                .withUser(adminUsername).password(adminPassword).roles("ADMIN");
+                .withUser(adminUsername).password(passwordEncoder().encode(adminPassword)).roles("ADMIN");
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
