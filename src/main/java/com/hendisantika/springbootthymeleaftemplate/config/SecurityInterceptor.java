@@ -2,7 +2,6 @@ package com.hendisantika.springbootthymeleaftemplate.config;
 
 import com.hendisantika.springbootthymeleaftemplate.model.UserSessionBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.thymeleaf.util.StringUtils;
 
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Date: 2019-04-25
  * Time: 06:43
  */
-@Component
+//@Component
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired

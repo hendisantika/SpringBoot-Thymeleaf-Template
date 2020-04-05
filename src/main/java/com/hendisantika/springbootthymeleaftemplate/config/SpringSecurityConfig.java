@@ -9,8 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
@@ -25,7 +24,7 @@ import javax.sql.DataSource;
  */
 
 @Configuration
-public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
+public class SpringSecurityConfig implements WebMvcConfigurer {
     @Autowired
     DataSource dataSource;
 
@@ -43,7 +42,7 @@ public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
-    @Autowired
+    //    @Autowired
     SecurityInterceptor securityInterceptor;
 
     /**
@@ -57,19 +56,18 @@ public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
      * @param http
      * @throws Exception
      */
-//    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/registration", "/error", "/h2-console/**").permitAll()
-//                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-//                .antMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/home").failureUrl("/loginError")
                 .permitAll()
                 .and()
                 .logout()
@@ -113,10 +111,10 @@ public class SpringSecurityConfig extends WebMvcConfigurerAdapter {
                 .withUser(adminUsername).password(passwordEncoder().encode(adminPassword)).roles("ADMIN");
     }
 
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(securityInterceptor)
-                .excludePathPatterns("/js/**", "/css/**", "/images/**", "/webjars/**");
-
-    }
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(securityInterceptor)
+//                .excludePathPatterns("/js/**", "/css/**", "/images/**", "/webjars/**");
+//
+//    }
 
 }

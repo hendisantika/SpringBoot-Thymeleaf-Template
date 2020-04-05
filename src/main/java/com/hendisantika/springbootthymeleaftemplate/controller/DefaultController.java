@@ -4,6 +4,7 @@ import com.hendisantika.springbootthymeleaftemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Time: 06:58
  */
 @Controller
+@RequestMapping
 public class DefaultController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/home")
+    @GetMapping({"/home", "/"})
     public String admin() {
         return "/home";
     }
