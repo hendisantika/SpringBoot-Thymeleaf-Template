@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -109,6 +110,12 @@ public class SpringSecurityConfig implements WebMvcConfigurer {
         // In memory authentication
         auth.inMemoryAuthentication()
                 .withUser(adminUsername).password(passwordEncoder().encode(adminPassword)).roles("ADMIN");
+    }
+
+
+    protected void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/h2-console/**");
     }
 
 //    public void addInterceptors(InterceptorRegistry registry) {
