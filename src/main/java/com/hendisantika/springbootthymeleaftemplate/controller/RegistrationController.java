@@ -4,6 +4,7 @@ import com.hendisantika.springbootthymeleaftemplate.model.User;
 import com.hendisantika.springbootthymeleaftemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,12 +28,10 @@ public class RegistrationController {
     private UserService userService;
 
     @GetMapping("/registration")
-    public ModelAndView registration() {
-        ModelAndView modelAndView = new ModelAndView();
+    public String registration(Model model) {
         User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
-        return modelAndView;
+        model.addAttribute("user", user);
+        return "registration";
     }
 
     @PostMapping("/registration")
