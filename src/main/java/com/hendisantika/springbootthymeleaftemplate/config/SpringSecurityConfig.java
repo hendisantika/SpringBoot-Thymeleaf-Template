@@ -7,10 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
@@ -25,7 +26,8 @@ import javax.sql.DataSource;
  */
 
 @Configuration
-public class SpringSecurityConfig implements WebMvcConfigurer {
+@EnableWebSecurity
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
@@ -34,7 +36,7 @@ public class SpringSecurityConfig implements WebMvcConfigurer {
     @Value("${spring.admin.username}")
     private String adminUsername;
 
-    @Value("${spring.admin.username}")
+    @Value("${spring.admin.password}")
     private String adminPassword;
 
     @Value("${spring.queries.users-query}")
@@ -57,6 +59,7 @@ public class SpringSecurityConfig implements WebMvcConfigurer {
      * @param http
      * @throws Exception
      */
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
@@ -112,8 +115,8 @@ public class SpringSecurityConfig implements WebMvcConfigurer {
                 .withUser(adminUsername).password(passwordEncoder().encode(adminPassword)).roles("ADMIN");
     }
 
-
-    protected void configure(WebSecurity web) throws Exception {
+    @Override
+    public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/h2-console/**");
     }
